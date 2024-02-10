@@ -1,17 +1,29 @@
-import { Button, VerticalBox } from "std-widgets.slint";
-
 export component AppWindow inherits Window {
-    in-out property<int> counter: 42;
-    callback request-increase-value();
-    VerticalBox {
-        Text {
-            text: "Counter: \{root.counter}";
+
+    title: "Tic Tac Toe";
+    width: 500px;
+    height: 500px;
+    background: #313e50;
+
+    property<color> cell-color: #dcdcdc;
+
+    GridLayout {
+        spacing: 5px;
+        Row {
+            Rectangle { background: cell-color; }
+            Rectangle { background: cell-color; }
+            Rectangle { background: cell-color; }
         }
-        Button {
-            text: "Increase value";
-            clicked => {
-                root.request-increase-value();
-            }
+        Row {
+            Rectangle { background: cell-color; }
+            Rectangle { background: cell-color; }
+            Rectangle { background: cell-color; }
         }
+        Row {
+            Rectangle { background: cell-color; }
+            Rectangle { background: cell-color; }
+            Rectangle { background: cell-color; }
+        }
+
     }
 }
