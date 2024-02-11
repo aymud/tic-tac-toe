@@ -1,31 +1,48 @@
 import { Cell } from "cell.slint";
 
+struct GamePieceData {
+    marker: string
+}
+
 export component AppWindow inherits Window {
 
-    in property <int> current-player;
+    in property <[GamePieceData]> board: [
+            { marker: "" },
+            { marker: "" },
+            { marker: "" },
+            { marker: "" },
+            { marker: "" },
+            { marker: "" },
+            { marker: "" },
+            { marker: "" },
+            { marker: "" }
+        ];
+
+    callback check-if-game-over();
+
+    private property <length> tile-spacing: 10px;
+    private property <length> cell-size: 150px;
+    private property <int> row-count: 3;
+    private property <int> column-count: 3;
 
     title: "Tic Tac Toe";
-    width: 700px;
-    height: 700px;
+    width: 500px;
+    height: 500px;
     background: #313e50;
 
-    GridLayout {
-        spacing: 5px;
-        padding: 5px;
-        Row {
-            Cell {current-player: current-player;}
-            Cell {current-player: current-player;}
-            Cell {current-player: current-player;}
+    for cell[i] in board: Cell {
+        clicked => {
+            if (cell.marker == "") {
+                cell.marker = "X";
+//                root.check-if-game-over();
+            }
         }
-        Row {
-            Cell {current-player: current-player;}
-            Cell {current-player: current-player;}
-            Cell {current-player: current-player;}
-        }
-        Row {
-            Cell {current-player: current-player;}
-            Cell {current-player: current-player;}
-            Cell {current-player: current-player;}
-        }
+        x: root.tile-spacing + mod(i, root.column-count) * (root.cell-size + root.tile-spacing);
+        y: root.tile-spacing + floor(i / root.row-count) * (root.cell-size + root.tile-spacing);
+
+        width: root.cell-size;
+        height: root.cell-size;
+
+        marker: cell.marker;
     }
 }

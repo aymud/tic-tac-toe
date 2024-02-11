@@ -1,9 +1,12 @@
 export component Cell inherits Rectangle {
-    private property <string> marker: "";
-    in-out property <int> current-player;
+    in property <string> marker: "";
+
+    callback clicked;
 
     Rectangle {
         background: #dcdcdc;
+        x: 0px;
+        y: 0px;
 
         Text {
             text: marker;
@@ -14,12 +17,10 @@ export component Cell inherits Rectangle {
 
         touch := TouchArea {
             clicked => {
-                // Only allow a move if the cell is empty
-                if (marker == "") {
-                    marker = current-player == 1 ? "X" : "O";
-                    current-player = 3 - current-player; // Switch players (1 to 2 and vice versa)
-                }
+                root.clicked();
             }
+            width: 100%;
+            height: 100%;
         }
     }
 }
