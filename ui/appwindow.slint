@@ -6,7 +6,7 @@ struct GamePieceData {
 
 export component AppWindow inherits Window {
 
-    in-out property <string> current-player: "X";
+    private property <string> current-player: "X";
     in property <[GamePieceData]> board: [
             { marker: "" },
             { marker: "" },
@@ -37,7 +37,7 @@ export component AppWindow inherits Window {
             if (cell.marker == "") {
                 cell.marker = current-player;
                 root.current-player = root.current-player == "X" ? "O" : "X";
-//                root.check-if-game-over();
+                root.check-if-game-over();
             }
         }
         // Calculate the centering offsets (x, y) for the cell.
