@@ -20,15 +20,16 @@ export component AppWindow inherits Window {
 
     callback check-if-game-over();
 
-    private property <length> tile-spacing: 10px;
+    private property <length> cell-spacing: 10px;
     private property <length> cell-size: 150px;
     private property <int> row-count: 3;
     private property <int> column-count: 3;
 
     title: "Tic Tac Toe";
-    width: 500px;
-    height: 500px;
     background: #313e50;
+    // Calculate the total width and height of the grid
+    width: (column-count * cell-size) + ((column-count + 1) * cell-spacing);
+    height: (row-count * cell-size) + ((row-count + 1) * cell-spacing);
 
     for cell[i] in board: Cell {
         clicked => {
@@ -37,8 +38,9 @@ export component AppWindow inherits Window {
 //                root.check-if-game-over();
             }
         }
-        x: root.tile-spacing + mod(i, root.column-count) * (root.cell-size + root.tile-spacing);
-        y: root.tile-spacing + floor(i / root.row-count) * (root.cell-size + root.tile-spacing);
+        // Calculate the centering offsets (x, y) for the cell.
+        x: root.cell-spacing + mod(i, root.column-count) * (root.cell-size + root.cell-spacing);
+        y: root.cell-spacing + floor(i / root.row-count) * (root.cell-size + root.cell-spacing);
 
         width: root.cell-size;
         height: root.cell-size;
