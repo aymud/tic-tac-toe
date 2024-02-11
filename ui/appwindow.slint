@@ -6,6 +6,7 @@ struct GamePieceData {
 
 export component AppWindow inherits Window {
 
+    in-out property <string> current-player: "X";
     in property <[GamePieceData]> board: [
             { marker: "" },
             { marker: "" },
@@ -27,14 +28,15 @@ export component AppWindow inherits Window {
 
     title: "Tic Tac Toe";
     background: #313e50;
-    // Calculate the total width and height of the grid
+    // Calculate the total width and height of the grid.
     width: (column-count * cell-size) + ((column-count + 1) * cell-spacing);
     height: (row-count * cell-size) + ((row-count + 1) * cell-spacing);
 
     for cell[i] in board: Cell {
         clicked => {
             if (cell.marker == "") {
-                cell.marker = "X";
+                cell.marker = current-player;
+                root.current-player = root.current-player == "X" ? "O" : "X";
 //                root.check-if-game-over();
             }
         }
