@@ -1,0 +1,25 @@
+export component Cell inherits Rectangle {
+    private property <string> marker: "";
+    in-out property <int> current-player;
+
+    Rectangle {
+        background: #dcdcdc;
+
+        Text {
+            text: marker;
+            font-size: 60px;
+            font-weight: 700;
+            color: black;
+        }
+
+        touch := TouchArea {
+            clicked => {
+                // Only allow a move if the cell is empty
+                if (marker == "") {
+                    marker = current-player == 1 ? "X" : "O";
+                    current-player = 3 - current-player; // Switch players (1 to 2 and vice versa)
+                }
+            }
+        }
+    }
+}

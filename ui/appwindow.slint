@@ -1,29 +1,31 @@
+import { Cell } from "cell.slint";
+
 export component AppWindow inherits Window {
 
-    title: "Tic Tac Toe";
-    width: 500px;
-    height: 500px;
-    background: #313e50;
+    in property <int> current-player;
 
-    property<color> cell-color: #dcdcdc;
+    title: "Tic Tac Toe";
+    width: 700px;
+    height: 700px;
+    background: #313e50;
 
     GridLayout {
         spacing: 5px;
+        padding: 5px;
         Row {
-            Rectangle { background: cell-color; }
-            Rectangle { background: cell-color; }
-            Rectangle { background: cell-color; }
+            Cell {current-player: current-player;}
+            Cell {current-player: current-player;}
+            Cell {current-player: current-player;}
         }
         Row {
-            Rectangle { background: cell-color; }
-            Rectangle { background: cell-color; }
-            Rectangle { background: cell-color; }
+            Cell {current-player: current-player;}
+            Cell {current-player: current-player;}
+            Cell {current-player: current-player;}
         }
         Row {
-            Rectangle { background: cell-color; }
-            Rectangle { background: cell-color; }
-            Rectangle { background: cell-color; }
+            Cell {current-player: current-player;}
+            Cell {current-player: current-player;}
+            Cell {current-player: current-player;}
         }
-
     }
 }
