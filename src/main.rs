@@ -29,18 +29,24 @@ fn main() -> Result<(), slint::PlatformError> {
     ui.run()
 }
 
-fn get_indices_of_winning_combination(grid: &Vec<GamePieceData>) -> Option<(usize, usize, usize)> {
+fn get_indices_of_winning_combination(grid: &[GamePieceData]) -> Option<(usize, usize, usize)> {
     const WINNING_COMBINATIONS: &[(usize, usize, usize)] = &[
-        (0, 1, 2), (3, 4, 5), (6, 7, 8), // Rows
-        (0, 3, 6), (1, 4, 7), (2, 5, 8), // Columns
-        (0, 4, 8), (2, 4, 6),            // Diagonals
+        (0, 1, 2),
+        (3, 4, 5),
+        (6, 7, 8), // Rows
+        (0, 3, 6),
+        (1, 4, 7),
+        (2, 5, 8), // Columns
+        (0, 4, 8),
+        (2, 4, 6), // Diagonals
     ];
 
     // Check each winning combination.
     for &(a, b, c) in WINNING_COMBINATIONS {
         if !grid[a].marker.is_empty()
             && grid[a].marker == grid[b].marker
-            && grid[b].marker == grid[c].marker {
+            && grid[b].marker == grid[c].marker
+        {
             return Some((a, b, c)); // winner winner chicken dinner.
         }
     }
@@ -48,5 +54,5 @@ fn get_indices_of_winning_combination(grid: &Vec<GamePieceData>) -> Option<(usiz
 }
 
 fn get_winner_marker(board: &[GamePieceData], (a, _, _): (usize, usize, usize)) -> String {
-    return board[a].marker.clone().to_string();
+    board[a].marker.clone().to_string()
 }
