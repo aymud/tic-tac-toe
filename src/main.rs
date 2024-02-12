@@ -31,7 +31,7 @@ fn check_winner(grid: &Vec<GamePieceData>) -> Option<String> {
             grid[a].marker.clone(),
             grid[b].marker.clone(),
             grid[c].marker.clone()) {
-            if ch1 == ch2 && ch2 == ch3 {
+            if !ch1.is_empty() && ch1 == ch2 && ch2 == ch3 {
                 return Some(ch1.to_string()); // winner winner chicken dinner.
             }
         }
