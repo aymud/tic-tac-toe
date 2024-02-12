@@ -1,5 +1,6 @@
 export component Cell inherits Rectangle {
     in property <string> marker: "";
+    in property <color> marker-color: black;
 
     callback clicked;
 
@@ -12,7 +13,7 @@ export component Cell inherits Rectangle {
             text: marker;
             font-size: 60px;
             font-weight: 700;
-            color: black;
+            color: marker-color;
         }
 
         touch := TouchArea {

@@ -1,7 +1,8 @@
 import { Cell } from "cell.slint";
 
 struct GamePieceData {
-    marker: string
+    marker: string,
+    marker-color: color
 }
 
 export component AppWindow inherits Window {
@@ -25,6 +26,7 @@ export component AppWindow inherits Window {
     private property <length> cell-size: 150px;
     private property <int> row-count: 3;
     private property <int> column-count: 3;
+    private property <color> marker-color: red;
 
     title: "Tic Tac Toe";
     background: #313e50;
@@ -36,6 +38,7 @@ export component AppWindow inherits Window {
         clicked => {
             if (cell.marker == "") {
                 cell.marker = current-player;
+                cell.marker-color = root.marker-color;
                 root.current-player = root.current-player == "X" ? "O" : "X";
                 root.check-if-game-over();
             }
@@ -48,5 +51,6 @@ export component AppWindow inherits Window {
         height: root.cell-size;
 
         marker: cell.marker;
+        marker-color: cell.marker-color;
     }
 }
