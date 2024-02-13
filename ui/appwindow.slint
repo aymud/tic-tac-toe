@@ -1,4 +1,5 @@
 import { Cell } from "cell.slint";
+import { HorizontalBox } from "std-widgets.slint";
 
 struct GamePieceData {
     marker: string,
@@ -7,7 +8,6 @@ struct GamePieceData {
 
 export component AppWindow inherits Window {
 
-    private property <string> current-player: "X";
     in property <bool> is-game-over: false;
     in property <[GamePieceData]> board: [
             { marker: "" },
@@ -23,17 +23,20 @@ export component AppWindow inherits Window {
 
     callback check-if-game-over();
 
+    private property <string> current-player: "X";
     private property <length> cell-spacing: 10px;
     private property <length> cell-size: 150px;
     private property <int> row-count: 3;
     private property <int> column-count: 3;
     private property <color> marker-color: red;
+    // Calculate the total width and height of the grid.
+    private property <length> game-board-width: (column-count * cell-size) + ((column-count + 1) * cell-spacing);
+    private property <length> game-board-height: (row-count * cell-size) + ((row-count + 1) * cell-spacing);
 
     title: "Tic Tac Toe";
     background: #313e50;
-    // Calculate the total width and height of the grid.
-    width: (column-count * cell-size) + ((column-count + 1) * cell-spacing);
-    height: (row-count * cell-size) + ((row-count + 1) * cell-spacing);
+    width: game-board-width;
+    height: game-board-height + 50px;
 
     for cell[i] in board: Cell {
         clicked => {
@@ -53,5 +56,25 @@ export component AppWindow inherits Window {
 
         marker: cell.marker;
         marker-color: cell.marker-color;
+    }
+
+    HorizontalBox {
+        Text {
+            text: "Restart";
+            color: red;
+            vertical-alignment: bottom;
+            font-size: 20px;
+        }
+        alignment: start;
+    }
+
+    HorizontalBox {
+        Text {
+            text: !root.is-game-over ? (root.current-player + " Turn") : "Game Over!";
+            color: red;
+            vertical-alignment: bottom;
+            font-size: 20px;
+        }
+        alignment: end;
     }
 }
