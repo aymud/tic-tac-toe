@@ -23,6 +23,7 @@ fn main() -> Result<(), slint::PlatformError> {
 
                 let board_model = ModelRc::from(Rc::new(VecModel::from(board)));
                 ui.set_board(board_model);
+                ui.set_is_game_over(true);
             }
         }
     });

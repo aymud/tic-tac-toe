@@ -8,6 +8,7 @@ struct GamePieceData {
 export component AppWindow inherits Window {
 
     private property <string> current-player: "X";
+    in property <bool> is-game-over: false;
     in property <[GamePieceData]> board: [
             { marker: "" },
             { marker: "" },
@@ -36,7 +37,7 @@ export component AppWindow inherits Window {
 
     for cell[i] in board: Cell {
         clicked => {
-            if (cell.marker == "") {
+            if (cell.marker == "" && !is-game-over) {
                 cell.marker = current-player;
                 cell.marker-color = root.marker-color;
                 root.current-player = root.current-player == "X" ? "O" : "X";
