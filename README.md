@@ -1,40 +1,35 @@
-# Slint Rust Template
+# Tic-Tac-Toe
 
-A template for a Rust application that's using [Slint](https://slint.rs) for the user interface.
+A Tic-Tac-Toe game application that's using [Slint](https://slint.rs) for the user interface, and Rust for the backend.
 
-## About
+The game provides a graphical user interface for two players to take turns marking spaces on a 3x3 grid.
+The game ends when a player wins or when the board is filled, resulting in a draw.
 
-This template helps you get started developing a Rust application with Slint as toolkit
-for the user interface. It demonstrates the integration between the `.slint` UI markup and
-Rust code, how to trigger react to callbacks, get and set properties and use basic widgets.
+## Running the Application Locally
 
-## Usage
-
-1. Install Rust by following the [Rust Getting Started Guide](https://www.rust-lang.org/learn/get-started).
-   Once this is done, you should have the ```rustc``` compiler and the ```cargo``` build system installed in your path.
-2. Install [`cargo-generate`](https://github.com/cargo-generate/cargo-generate)
-    ```
-    cargo install cargo-generate
-    ```
-3. Set up a sample project with this template
-    ```
-    cargo generate --git https://github.com/slint-ui/slint-rust-template --name my-project
-    cd my-project
-    ```
-3. Build with cargo
+1. Clone the repository to your local machine
+2. Build with cargo. This command compiles the code and generates an executable file.
     ```
     cargo build
     ```
-4. Run the application binary
+3. Run the application binary
      ```
      cargo run
      ```
 
-We recommend using an IDE for development, along with our [LSP-based IDE integration for `.slint` files](https://github.com/slint-ui/slint/blob/master/tools/lsp/README.md). You can also load this project directly in [Visual Studio Code](https://code.visualstudio.com) and install our [Slint extension](https://marketplace.visualstudio.com/items?itemName=Slint.slint).
+## Prerequisites
 
-## Next Steps
+- Install Rust by following the [Rust Getting Started Guide](https://www.rust-lang.org/learn/get-started).  
+  Once this is done, you should have the ```rustc``` compiler and the ```cargo``` build system installed in your path.
+- An Integrated Development Environment (IDE)
+    - Visual Studio Code
+    - IntelliJ IDEA
 
-We hope that this template helps you get started and you enjoy exploring making user interfaces with Slint. To learn more
-about the Slint APIs and the `.slint` markup language check out our [online documentation](https://slint.dev/docs).
+## Why Slint & Rust?
 
-Don't forget to edit this README to replace it by yours
+This project primarily serves as a practice exercise for developing skills in Rust,
+
+Slint was chosen because it integrates with Rust nicely.
+Also, it is a declarative UI framework and provides a concise and expressive syntax for creating user interfaces.
+
+Hakuna Matata! 😊
