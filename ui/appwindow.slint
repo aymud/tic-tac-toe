@@ -1,5 +1,6 @@
 import { Cell } from "cell.slint";
-import { HorizontalBox } from "std-widgets.slint";
+import { TurnInfo } from "turninfo.slint";
+import { HorizontalBox, VerticalBox } from "std-widgets.slint";
 
 struct GamePieceData {
     marker: string,
@@ -80,5 +81,27 @@ export component AppWindow inherits Window {
             font-size: 20px;
         }
         alignment: end;
+    }
+
+    HorizontalBox {
+        VerticalLayout{
+            TurnInfo {
+                rect-x: !is-game-over && root.current-player == "O" ? 9px : -50px;
+            }
+            alignment: end;
+            padding-bottom: 40px;
+        }
+        alignment: center;
+    }
+
+    HorizontalBox {
+        Text {
+            text: "X        O";
+            color: black;
+            vertical-alignment: bottom;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        alignment: center;
     }
 }

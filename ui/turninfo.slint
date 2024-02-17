@@ -1,0 +1,21 @@
+import { CheckBox } from "std-widgets.slint";
+
+export component TurnInfo inherits Rectangle {
+
+    in property <length> rect-x;
+
+    Rectangle {
+        x: rect-x;
+        y: 7px;
+        width: 40px;
+        height: 40px;
+        background: rgba(0, 255, 0, 0.75);
+        border-width: 1px;
+        border-color: black;
+        border-radius: 10px;
+        animate x {
+            duration: 500ms;
+            easing: ease-in-out;
+        }
+    }
+}
