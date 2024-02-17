@@ -1,24 +1,36 @@
-name: Continuous deployment
+name: Continuous deployment (WASM Build)
 on: [ push, pull_request ]
 
 jobs:
-  release:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions-rs/toolchain@v1
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Rust
+        uses: actions/setup-rust@v1
         with:
-          toolchain: stable
-          target: wasm32-unknown-unknown
+          rust-version: stable
 
-      - uses: jetli/trunk-action@v0.1.0
-      - uses: jetli/wasm-bindgen-action@v0.1.0
+      - name: Install wasm-pack
+        run: cargo install wasm-pack
 
-      - uses: actions/checkout@v2
+      - name: Build WebAssembly
+        run: wasm-pack build --target web
 
-      - run: trunk build --release
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
 
-      - uses: peaceiris/actions-gh-pages@v3
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         if: github.ref == 'refs/heads/main'
         with:
-          github_token: $
-          publish_dir: ./dist
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./pkg
