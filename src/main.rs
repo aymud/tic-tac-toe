@@ -72,10 +72,6 @@ fn get_indices_of_winning_combination(grid: &[GamePieceData]) -> Option<(usize, 
     None // No winner found.
 }
 
-fn get_winner_marker(board: &[GamePieceData], (a, _, _): (usize, usize, usize)) -> String {
-    board[a].marker.clone().to_string()
-}
-
 fn clear_game_board(board: &mut [GamePieceData]) {
     for cell in board.iter_mut() {
         cell.marker = "".into();
