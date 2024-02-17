@@ -38,7 +38,6 @@ fn main() -> Result<(), slint::PlatformError> {
 
             ui.set_current_player("X".into());
             ui.set_is_game_over(false);
-            println!("game reset");
         }
     });
 
@@ -80,5 +79,181 @@ fn get_winner_marker(board: &[GamePieceData], (a, _, _): (usize, usize, usize)) 
 fn clear_game_board(board: &mut [GamePieceData]) {
     for cell in board.iter_mut() {
         cell.marker = "".into();
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_get_indices_of_winning_combination() {
+        // Test a winning combination in a row.
+        let board = vec![
+            GamePieceData {
+                marker: "X".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "X".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "X".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+        ];
+
+        assert_eq!(get_indices_of_winning_combination(&board), Some((0, 1, 2)));
+
+        // Test a winning combination in a column.
+        let board = vec![
+            GamePieceData {
+                marker: "X".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "X".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "X".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+        ];
+
+        assert_eq!(get_indices_of_winning_combination(&board), Some((0, 3, 6)));
+
+        // Test a winning combination in a diagonal.
+        let board = vec![
+            GamePieceData {
+                marker: "O".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "O".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "O".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+        ];
+
+        assert_eq!(get_indices_of_winning_combination(&board), Some((0, 4, 8)));
+
+        // Test no winning combination.
+        let board = vec![
+            GamePieceData {
+                marker: "X".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "O".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "X".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "O".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "X".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "X".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "O".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+            GamePieceData {
+                marker: "".into(),
+                marker_color: Color::from_rgb_u8(0, 0, 0),
+            },
+        ];
+
+        assert_eq!(get_indices_of_winning_combination(&board), None);
     }
 }
