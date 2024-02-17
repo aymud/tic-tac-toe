@@ -25,6 +25,9 @@ jobs:
       - name: Deploy to GH Pages 🚀
         uses: peaceiris/actions-gh-pages@v3
         with:
+          target_branch: gh-pages
           publish_dir: ./pkg
+          keep_history: false
+          jekyll: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
