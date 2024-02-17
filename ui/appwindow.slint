@@ -1,6 +1,6 @@
 import { Cell } from "cell.slint";
 import { TurnInfo } from "turninfo.slint";
-import { HorizontalBox, VerticalBox } from "std-widgets.slint";
+import { HorizontalBox, VerticalBox, Button } from "std-widgets.slint";
 
 struct GamePieceData {
     marker: string,
@@ -36,6 +36,7 @@ export component AppWindow inherits Window {
     private property <length> game-board-height: (row-count * cell-size) + ((row-count + 1) * cell-spacing);
 
     title: "Tic Tac Toe";
+    default-font-family: "Noto Sans";
     background: #313e50;
     width: game-board-width;
     height: game-board-height + 50px;
@@ -61,13 +62,11 @@ export component AppWindow inherits Window {
     }
 
     HorizontalBox {
-        Text {
-            text: "Restart";
-            color: red;
-            vertical-alignment: bottom;
-            font-size: 20px;
-            TouchArea {
-                clicked => { root.restart-game(); }
+        VerticalLayout{
+            alignment: end;
+            Button {
+                text: "Restart";
+                clicked => { root.restart-game() }
             }
         }
         alignment: start;
@@ -76,7 +75,7 @@ export component AppWindow inherits Window {
     HorizontalBox {
         Text {
             text: !root.is-game-over ? (root.current-player + " Turn") : "Game Over!";
-            color: red;
+            color: white;
             vertical-alignment: bottom;
             font-size: 20px;
         }
@@ -85,9 +84,9 @@ export component AppWindow inherits Window {
 
     HorizontalBox {
         VerticalLayout{
-            TurnInfo {
-                rect-x: !is-game-over && root.current-player == "O" ? 9px : -50px;
-            }
+            // The x position for the transition came from trial and error.
+            // Note: If the font size, width or other property is changed, these may need to be adjusted.
+            TurnInfo { rect-x: !is-game-over && root.current-player == "O" ? 9px : -50px; }
             alignment: end;
             padding-bottom: 40px;
         }
@@ -97,7 +96,7 @@ export component AppWindow inherits Window {
     HorizontalBox {
         Text {
             text: "X        O";
-            color: black;
+            color: white;
             vertical-alignment: bottom;
             font-size: 20px;
             font-weight: 700;
