@@ -6,7 +6,8 @@ edition = "2021"
 build = "build.rs"
 description = "Tic tac toe game"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+crate-type = ["cdylib"]
 
 [dependencies]
 slint = "1.4"
