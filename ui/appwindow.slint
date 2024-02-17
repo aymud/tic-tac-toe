@@ -30,7 +30,8 @@ export component AppWindow inherits Window {
     private property <length> cell-size: 150px;
     private property <int> row-count: 3;
     private property <int> column-count: 3;
-    private property <color> marker-color: red;
+    private property <color> marker-color-x: #800080;
+    private property <color> marker-color-o: #ffa500;
     // Calculate the total width and height of the grid.
     private property <length> game-board-width: (column-count * cell-size) + ((column-count + 1) * cell-spacing);
     private property <length> game-board-height: (row-count * cell-size) + ((row-count + 1) * cell-spacing);
@@ -45,7 +46,7 @@ export component AppWindow inherits Window {
         clicked => {
             if (cell.marker == "" && !is-game-over) {
                 cell.marker = current-player;
-                cell.marker-color = root.marker-color;
+                cell.marker-color = root.current-player == "X" ? root.marker-color-x : root.marker-color-o;
                 root.current-player = root.current-player == "X" ? "O" : "X";
                 root.check-if-game-over();
             }
