@@ -5,6 +5,8 @@ A Tic-Tac-Toe game application that's using [Slint](https://slint.rs) for the us
 The game provides a graphical user interface for two players to take turns marking spaces on a 3x3 grid.
 The game ends when a player wins or when the board is filled, resulting in a draw.
 
+<p align="center"><img  src="https://github.com/AMax23/tic-tac-toe/assets/37085550/93d68a7a-7011-4538-9560-5d6d192f6f00" width="40%"></p>
+
 ## Running the Application Locally
 
 1. Clone the repository to your local machine
