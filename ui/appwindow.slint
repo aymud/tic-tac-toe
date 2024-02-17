@@ -8,6 +8,7 @@ struct GamePieceData {
 
 export component AppWindow inherits Window {
 
+    in-out property <string> current-player: "X";
     in property <bool> is-game-over: false;
     in property <[GamePieceData]> board: [
             { marker: "" },
@@ -22,8 +23,8 @@ export component AppWindow inherits Window {
         ];
 
     callback check-if-game-over();
+    callback restart-game();
 
-    private property <string> current-player: "X";
     private property <length> cell-spacing: 10px;
     private property <length> cell-size: 150px;
     private property <int> row-count: 3;
@@ -64,6 +65,9 @@ export component AppWindow inherits Window {
             color: red;
             vertical-alignment: bottom;
             font-size: 20px;
+            TouchArea {
+                clicked => { root.restart-game(); }
+            }
         }
         alignment: start;
     }
