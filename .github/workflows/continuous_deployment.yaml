@@ -12,7 +12,9 @@ jobs:
         run: cargo install wasm-pack
 
       - name: Build WebAssembly 🏗
-        run: wasm-pack build --target web
+        run: |
+          sed -i "s/#wasm# //" Cargo.toml
+          wasm-pack build --release --target web
 
       - name: Upload wasm dist artifact
         uses: actions/upload-artifact@v2
