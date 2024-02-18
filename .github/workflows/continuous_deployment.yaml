@@ -30,7 +30,7 @@ jobs:
       - name: Deploy to GH Pages 🚀
         uses: crazy-max/ghaction-github-pages@v3
         with:
-          target_branch: gh-pages
+          target_branch: main
           build_dir: ./pkg
           keep_history: false
           jekyll: false
