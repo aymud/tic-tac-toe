@@ -12,7 +12,6 @@ name = "tic-tac-toe"
 
 [dependencies]
 slint = "1.4"
-wasm-bindgen = "0.2"
 
 [build-dependencies]
 slint-build = "1.4"
@@ -22,7 +21,7 @@ slint-build = "1.4"
 # The CI has a script that does sed "s/#wasm# //" to generate the wasm build.
 
 #wasm# [lib]
-#wasm# path = "src/main.rs"
+#wasm# path = "lib"
 #wasm# crate-type = ["cdylib"]
 
 #wasm# [target.'cfg(target_arch = "wasm32")'.dependencies]

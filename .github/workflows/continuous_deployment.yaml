@@ -6,10 +6,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-rust
+        with:
+          target: wasm32-unknown-unknown
       - name: Install wasm-pack 🔧
-        run: cargo install wasm-pack
+        run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
       - name: Build WebAssembly 🏗
         run: |
