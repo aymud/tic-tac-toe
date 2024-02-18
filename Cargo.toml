@@ -7,7 +7,7 @@ build = "build.rs"
 description = "Tic tac toe game"
 
 [[bin]]
-path = "main.rs"
+path = "src/main.rs"
 name = "tic-tac-toe"
 
 [dependencies]
