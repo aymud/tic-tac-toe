@@ -20,7 +20,7 @@ slint-build = "1.4"
 # This is commented out by default because we don't want to build it as a library by default
 # The CI has a script that does sed "s/#wasm# //" to generate the wasm build.
 
-#wasm# [lib]
+#wasm# [src/lib]
 #wasm# path = "lib"
 #wasm# crate-type = ["cdylib"]
 
