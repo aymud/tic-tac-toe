@@ -22,7 +22,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: wasm-dist
-          path: ./*
+          path: ./pkg
 
       - name: Clean cache # Otherwise the cache is much too big.
         run: |
@@ -43,7 +43,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: wasm-dist
-          path: ./*
+          path: ./pkg
 
       - name: Deploy to GH Pages 🚀
         uses: crazy-max/ghaction-github-pages@v3
