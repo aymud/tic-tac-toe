@@ -14,6 +14,12 @@ jobs:
       - name: Build WebAssembly 🏗
         run: wasm-pack build --target web
 
+      - name: Upload wasm dist artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: wasm-dist   # <-- Choose any name you prefer
+          path: ./pkg
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -25,6 +31,7 @@ jobs:
       - name: Download wasm dist artifact
         uses: actions/download-artifact@v3
         with:
+          name: wasm-dist
           path: ./pkg
 
       - name: Deploy to GH Pages 🚀
