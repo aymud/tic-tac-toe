@@ -21,7 +21,7 @@ slint-build = "1.4"
 # The CI has a script that does sed "s/#wasm# //" to generate the wasm build.
 
 #wasm# [lib]
-#wasm# path = "src/lib"
+#wasm# path = "src/lib.rs"
 #wasm# crate-type = ["cdylib"]
 
 #wasm# [target.'cfg(target_arch = "wasm32")'.dependencies]
