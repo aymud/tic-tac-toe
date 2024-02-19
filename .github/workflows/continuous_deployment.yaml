@@ -27,46 +27,36 @@ jobs:
 
       - name: Copy index.html to pkg directory
         run: cp index.html ./pkg
+      #
+      #      - name: Upload wasm dist artifacts
+      #        uses: actions/upload-artifact@v2
+      #        with:
+      #          name: wasm-dist
+      #          path: ./pkg
 
-      - name: Upload wasm dist artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: wasm-dist
-          path: ./pkg
+      #      - name: Clean cache # Otherwise the cache is much too big.
+      #        run: |
+      #          du -hs target
+      #          rm -rf target/*/incremental
+      #          rm -rf target/*/*/*slint*
+      #          du -hs target
 
-      - name: Clean cache # Otherwise the cache is much too big.
-        run: |
-          du -hs target
-          rm -rf target/*/incremental
-          rm -rf target/*/*/*slint*
-          du -hs target          
+      #  deploy:
+      #    needs: build
+      #    runs-on: ubuntu-latest
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
+      #    steps:
       - name: Checkout Repository 🛎️
         uses: actions/checkout@v2
 
-      - name: Download wasm dist artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: wasm-dist
-          path: ./pkg
+      #      - name: Download wasm dist artifacts
+      #        uses: actions/download-artifact@v3
+      #        with:
+      #          name: wasm-dist
+      #          path: ./pkg
 
-      - name: Deploy
+      - name: Deploy to GitHub Pages 🚀
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./pkg
-
-      - name: Deploy to GH Pages 🚀
-        uses: crazy-max/ghaction-github-pages@v3
-        with:
-          target_branch: gh-pages
-          build_dir: ./pkg
-          keep_history: true
-          dry_run: ${{ github.event_name == 'pull_request' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
