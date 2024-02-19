@@ -2,10 +2,14 @@ use std::rc::Rc;
 
 use slint::{Color, Model, ModelRc, VecModel};
 
+#[cfg(target_arch = "wasm32")]
+use wasm_bindgen::prelude::*;
+
 slint::include_modules!();
 
-fn main() -> Result<(), slint::PlatformError> {
-    let ui = AppWindow::new()?;
+#[cfg_attr(target_arch = "wasm32", wasm_bindgen(start))]
+fn main() {
+    let ui = AppWindow::new().unwrap();
 
     ui.on_check_if_game_over({
         let ui_handle = ui.as_weak();
@@ -41,7 +45,7 @@ fn main() -> Result<(), slint::PlatformError> {
         }
     });
 
-    ui.run()
+    ui.run().unwrap();
 }
 
 fn get_game_board(ui: &AppWindow) -> Vec<GamePieceData> {
