@@ -5,6 +5,8 @@ on:
     workflows: [ Continuous integration ]
     types: [ completed ]
 
+permissions:
+  contents: write
 
 jobs:
   build:
