@@ -1,5 +1,10 @@
 name: Continuous deployment (WASM Build)
-on: [ push, pull_request ]
+on:
+  workflow_run:
+    branches: [ main ]
+    workflows: [ Continuous integration ]
+    types: [ completed ]
+
 
 jobs:
   build:
