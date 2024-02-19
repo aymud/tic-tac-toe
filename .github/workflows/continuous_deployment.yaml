@@ -23,6 +23,9 @@ jobs:
           sed -i "s/#wasm# //" Cargo.toml
           wasm-pack build --release --target web
 
+      - name: Copy index.html to pkg directory
+        run: cp index.html ./pkg
+
       - name: Upload wasm dist artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -49,9 +52,6 @@ jobs:
         with:
           name: wasm-dist
           path: ./pkg
-
-      - name: Copy index.html to pkg directory
-        run: cp index.html ./pkg
 
       - name: Deploy to GH Pages 🚀
         uses: crazy-max/ghaction-github-pages@v3
