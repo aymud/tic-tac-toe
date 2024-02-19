@@ -58,5 +58,7 @@ jobs:
         with:
           target_branch: gh-pages
           build_dir: ./pkg
+          keep_history: true
+          dry_run: ${{ github.event_name == 'pull_request' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
