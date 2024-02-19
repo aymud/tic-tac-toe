@@ -23,9 +23,6 @@ jobs:
           sed -i "s/#wasm# //" Cargo.toml
           wasm-pack build --release --target web
 
-      - name: Create index.html from Another File
-        run: cat ./app.html > index.html
-
       - name: Copy index.html to pkg directory
         run: cp index.html ./pkg
 
@@ -59,9 +56,7 @@ jobs:
       - name: Deploy to GH Pages 🚀
         uses: crazy-max/ghaction-github-pages@v3
         with:
-          target_branch: main
+          target_branch: gh-pages
           build_dir: ./pkg
-          keep_history: false
-          jekyll: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
