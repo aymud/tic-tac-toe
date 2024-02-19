@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  buildAndDeploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,6 +32,15 @@ jobs:
       - name: Copy index.html to pkg directory
         run: cp index.html ./pkg
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository 🛎️
+        uses: actions/checkout@v2
+
+      # The wasm build ignores all the files in the pkg dir, but they are needed for the deployment.
       - name: Remove .gitignore from pkg directory
         run: rm -f ./pkg/.gitignore
 
@@ -39,4 +48,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./pkg/
+          publish_dir: ./pkg
