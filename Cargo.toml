@@ -13,12 +13,16 @@ slint = "1.0"
 [build-dependencies]
 slint-build = "1.0"
 
-[target.'cfg(target_arch = "wasm32")'.dependencies]
-wasm-bindgen = { version = "0.2" }
-getrandom = { version = "0.2.2", features = ["js"] }
-web-sys = { version = "0.3", features = ["console", "Element", "HtmlCollection"] }
-console_error_panic_hook = "0.1.5"
+# Remove the `#wasm#` to uncomment the wasm build.
+# This is commented out by default because we don't want to build it as a library by default
+# The CI has a script that does sed "s/#wasm# //" to generate the wasm build.
 
-[lib]
-path = "src/main.rs"
-crate-type = ["cdylib"]
+#wasm# [lib]
+#wasm# path = "src/main.rs"
+#wasm# crate-type = ["cdylib"]
+
+#wasm# [target.'cfg(target_arch = "wasm32")'.dependencies]
+#wasm# wasm-bindgen = { version = "0.2" }
+#wasm# web-sys = { version = "0.3", features=["console"] }
+#wasm# console_error_panic_hook = "0.1.5"
+#wasm# getrandom = { version = "0.2.2", features = ["js"] }
