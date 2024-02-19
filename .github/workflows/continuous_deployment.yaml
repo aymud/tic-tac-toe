@@ -32,6 +32,9 @@ jobs:
       - name: Copy index.html to pkg directory
         run: cp index.html ./pkg
 
+      - name: Remove .gitignore from pkg directory
+        run: rm -f ./pkg/.gitignore
+
       - name: Deploy to GitHub Pages 🚀
         uses: peaceiris/actions-gh-pages@v3
         with:
