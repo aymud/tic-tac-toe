@@ -23,6 +23,9 @@ jobs:
           sed -i "s/#wasm# //" Cargo.toml
           wasm-pack build --release --target web
 
+      - name: Create index.html from Another File
+        run: cat ./app.html > index.html
+
       - name: Copy index.html to pkg directory
         run: cp index.html ./pkg
 
