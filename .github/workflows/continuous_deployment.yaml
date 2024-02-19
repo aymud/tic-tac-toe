@@ -45,6 +45,9 @@ jobs:
           name: wasm-dist
           path: ./pkg
 
+      - name: Copy index.html to pkg directory
+        run: cp index.html ./pkg
+
       - name: Deploy to GH Pages 🚀
         uses: crazy-max/ghaction-github-pages@v3
         with:
