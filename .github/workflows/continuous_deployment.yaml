@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  build:
+  buildAndDeploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,36 +27,12 @@ jobs:
 
       - name: Copy index.html to pkg directory
         run: cp index.html ./pkg
-      #
-      #      - name: Upload wasm dist artifacts
-      #        uses: actions/upload-artifact@v2
-      #        with:
-      #          name: wasm-dist
-      #          path: ./pkg
 
-      #      - name: Clean cache # Otherwise the cache is much too big.
-      #        run: |
-      #          du -hs target
-      #          rm -rf target/*/incremental
-      #          rm -rf target/*/*/*slint*
-      #          du -hs target
-
-      #  deploy:
-      #    needs: build
-      #    runs-on: ubuntu-latest
-
-      #    steps:
       - name: Checkout Repository 🛎️
         uses: actions/checkout@v2
-
-      #      - name: Download wasm dist artifacts
-      #        uses: actions/download-artifact@v3
-      #        with:
-      #          name: wasm-dist
-      #          path: ./pkg
 
       - name: Deploy to GitHub Pages 🚀
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./pkg
+          publish_dir: ./pkg/
