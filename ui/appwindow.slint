@@ -48,7 +48,9 @@ export component AppWindow inherits Window {
                 cell.marker = current-player;
                 cell.marker-color = root.current-player == "X" ? root.marker-color-x : root.marker-color-o;
                 root.check-if-game-over();
-                root.current-player = !root.is-game-over && root.current-player == "X" ? "O" : "X";
+                if (!root.is-game-over) {
+                    root.current-player = root.current-player == "X" ? "O" : "X";
+                }
             }
         }
         // Calculate the centering offsets (x, y) for the cell.
@@ -84,10 +86,10 @@ export component AppWindow inherits Window {
     }
 
     HorizontalBox {
-        VerticalLayout{
+        VerticalLayout {
             // The x position for the transition came from trial and error.
             // Note: If the font size, width or other property is changed, these may need to be adjusted.
-            TurnInfo { rect-x: !root.is-game-over && root.current-player == "O" ? 9px : -50px; }
+            TurnInfo { rect-x: root.current-player == "O" ? 9px : -50px; }
             alignment: end;
             padding-bottom: 40px;
         }
