@@ -27,6 +27,11 @@ fn main() {
                 ui.set_board(board_model);
                 ui.set_is_game_over(true);
             }
+            // In case of ties.
+            let board: Vec<GamePieceData> = get_game_board(&ui);
+            if is_game_board_full(&board) {
+                ui.set_is_game_over(true);
+            }
         }
     });
 
@@ -74,6 +79,15 @@ fn get_indices_of_winning_combination(grid: &[GamePieceData]) -> Option<(usize, 
         }
     }
     None // No winner found.
+}
+
+fn is_game_board_full(board: &[GamePieceData]) -> bool {
+    for cell in board.iter() {
+        if cell.marker.is_empty() {
+            return false;
+        }
+    }
+    true
 }
 
 fn clear_game_board(board: &mut [GamePieceData]) {
