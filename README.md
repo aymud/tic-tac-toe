@@ -1,5 +1,5 @@
 <h1 align="center">Tic-Tac-Toe</h1>
-<h2 align="center"><a href="https://amax23.github.io/tic-tac-toe/">View Live</a></h2>
+<h2 align="center"><a href="https://aymud/tic-tac-toe/">View Live</a></h2>
 
 A Tic-Tac-Toe game application that's using [Slint](https://slint.rs) for the user interface, and Rust for the backend.
 
